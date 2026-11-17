@@ -240,13 +240,13 @@ window.SITE = {
         "25개 stage의 구현 flow를 순서대로 실행하고, 모든 log와 report를 읽어 stage별 PASS/FAIL을 판정하는 데스크톱 도구입니다."
       ),
       highlights: [
-        L("Full CISC flow, 25 stages, in 8 minutes 45 seconds", "CISC 전체 flow(25 stage)를 8분 45초에 실행"),
+        L("Full CISC flow, 25 stages, in 8 minutes 44 seconds", "CISC 전체 flow(25 stage)를 8분 44초에 실행"),
         L("Pass or fail decided by rules I defined for each tool", "tool별로 직접 정의한 규칙으로 PASS/FAIL 자동 판정"),
         L("21 PPA metrics stored per run for comparison", "실행마다 21개 PPA 지표를 저장해 비교")
       ],
       facts: [
         [L("Flow", "Flow"), L("25 stages across Design Compiler, IC Compiler II, StarRC, PrimeTime, Formality and VCS", "Design Compiler, IC Compiler II, StarRC, PrimeTime, Formality, VCS에 걸친 25 stage")],
-        [L("Run time", "실행 시간"), L("8 minutes 45 seconds for the full CISC flow", "CISC 전체 flow 8분 45초")],
+        [L("Run time", "실행 시간"), L("8 minutes 44 seconds for the full CISC flow", "CISC 전체 flow 8분 44초")],
         [L("Metrics", "지표"), L("21 PPA metrics per design cycle, stored in SQLite", "cycle마다 21개 PPA 지표를 SQLite에 저장")],
         [L("Reuse", "재사용"), L("Used again on ORCA with light tuning", "약간의 튜닝만으로 ORCA 프로젝트에 재사용")]
       ],
