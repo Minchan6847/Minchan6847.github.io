@@ -1,5 +1,7 @@
 # Minchan6847.github.io
 
+**English** | [한국어](README.ko.md)
+
 Portfolio and resume site of Minchan Kim, digital IC design engineer.
 Live at <https://minchan6847.github.io>.
 
