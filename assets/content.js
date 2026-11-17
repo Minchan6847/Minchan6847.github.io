@@ -32,7 +32,9 @@ window.SITE = {
   stages: [
     { id: "rtl", label: L("RTL design", "RTL 설계"), short: L("RTL", "RTL") },
     { id: "ver", label: L("Verification", "Verification"), short: L("Verif.", "검증") },
-    { id: "syn", label: L("Synthesis and STA", "Synthesis · STA"), short: L("Synth.", "합성") },
+    { id: "syn", label: L("Synthesis", "Synthesis"), short: L("Synth.", "합성") },
+    { id: "lec", label: L("LEC", "LEC"), short: L("LEC", "LEC") },
+    { id: "sta", label: L("STA", "STA"), short: L("STA", "STA") },
     { id: "pnr", label: L("P&R and layout", "P&R · Layout"), short: L("P&R", "P&R") },
     { id: "sign", label: L("Sign-off", "Sign-off"), short: L("Sign-off", "Sign-off") },
     { id: "auto", label: L("Flow automation", "Flow 자동화"), short: L("Autom.", "자동화") }
@@ -50,7 +52,7 @@ window.SITE = {
         "KDT 교육과정 파이널 프로젝트. 파이널 해커톤 최우수상."
       ),
       tools: "SAED 32nm, IC Compiler II, PrimeTime, Formality, StarRC, VCS, Verdi, UVM 1.2, UPF",
-      stages: ["ver", "pnr", "sign", "auto"],
+      stages: ["ver", "lec", "sta", "pnr", "sign", "auto"],
       summary: L(
         "Physical implementation of a 32-bit RISC SoC from a supplied synthesized netlist: about 51,000 standard cells, 40 SRAM macros, two supply rails and three asynchronous clock groups.",
         "제공받은 합성 netlist로 32-bit RISC SoC를 물리 구현했습니다. standard cell 약 51,000개, SRAM macro 40개, 전원 rail 2개, 비동기 clock group 3개 규모입니다."
@@ -159,7 +161,7 @@ window.SITE = {
       period: L("March to May 2026", "2026.03 ~ 2026.05"),
       context: L("First project of the KDT program.", "KDT 교육과정 첫 번째 프로젝트."),
       tools: "SAED 32nm, Design Compiler, IC Compiler II, PrimeTime, Formality, StarRC, VCS, Verdi",
-      stages: ["ver", "syn", "pnr", "sign", "auto"],
+      stages: ["ver", "syn", "lec", "sta", "pnr", "sign", "auto"],
       summary: L(
         "The full implementation flow for an 8-bit CISC processor with a 714 MHz target (1.4 ns period). The RTL was supplied. I analyzed it, then took it through synthesis, place and route, and sign-off.",
         "8-bit CISC 프로세서를 714 MHz(주기 1.4 ns) 목표로 구현했습니다. 제공받은 RTL을 분석한 뒤 합성, P&R, sign-off까지 전 과정을 수행했습니다."
@@ -303,7 +305,7 @@ window.SITE = {
         "Internship in a circuit design lab at the Korea Institute of Science and Technology (KIST).",
         "한국과학기술연구원(KIST) 회로설계 연구실 현장실습."
       ),
-      tools: "TSMC 180nm, Cadence Virtuoso, Verilog, Opal Kelly FPGA, Python",
+      tools: "TSMC 180nm, Cadence Virtuoso, Cadence Encounter (P&R), Verilog, Eagle (PCB), Opal Kelly FPGA, Python",
       stages: ["rtl", "ver", "pnr"],
       summary: L(
         "Design and layout of digital blocks for a SPAD-based 3D ranging image sensor in TSMC 180 nm, and a measurement setup for a second chip.",
@@ -332,6 +334,10 @@ window.SITE = {
               "처음 TDC는 합성된 logic이었습니다. 이를 gate-level 설계로 바꿔 면적을 약 43% 줄였습니다."
             ),
             L(
+              "The synthesized netlists were placed and routed in Cadence Encounter.",
+              "합성된 netlist의 P&R은 Cadence Encounter로 진행했습니다."
+            ),
+            L(
               "In Cadence Virtuoso I integrated the top level with the pad ring and brought the full layout to clean DRC and LVS.",
               "Cadence Virtuoso로 top과 pad ring을 통합하고, 전체 layout을 DRC, LVS clean까지 완료했습니다."
             )
@@ -341,8 +347,8 @@ window.SITE = {
           h: L("Measurement system", "측정 시스템"),
           body: [
             L(
-              "For a chip that records electrical and fluorescence signals from the brain, I designed, ordered and soldered the test board, wrote the Verilog for an Opal Kelly FPGA module that drives the chip, and built the Python front end used to run measurements.",
-              "뇌의 전기 신호와 형광 신호를 측정하는 칩을 위해 test board를 설계, 발주, 납땜했고, 칩을 구동하는 Opal Kelly FPGA용 Verilog 코드와 측정에 쓰는 Python GUI를 만들었습니다."
+              "For a chip that records electrical and fluorescence signals from the brain, I designed the test board in Eagle (schematic and PCB layout), ordered and soldered it, wrote the Verilog for an Opal Kelly FPGA module that drives the chip, and built the Python front end used to run measurements.",
+              "뇌의 전기 신호와 형광 신호를 측정하는 칩을 위해 Eagle로 test board의 schematic과 PCB layout을 설계해 발주, 납땜했고, 칩을 구동하는 Opal Kelly FPGA용 Verilog 코드와 측정에 쓰는 Python GUI를 만들었습니다."
             )
           ]
         }
@@ -575,10 +581,10 @@ window.SITE = {
       stages: ["rtl", "ver"],
       inMap: true,
       short: L("FPGA exercises", "FPGA 실습"),
-      repo: { url: "https://github.com/Minchan6847/KDT_Vivado", private: true },
+      repo: { url: "https://github.com/Minchan6847/KDT_Vivado", private: false },
       text: L(
-        "A digital watch, a keypad calculator debugged with an integrated logic analyzer, an 8-tap fully parallel FIR filter with Baugh-Wooley signed multipliers, and UART transmit and receive, built in Vivado.",
-        "Digital watch, ILA로 디버깅한 keypad 계산기, Baugh-Wooley signed multiplier를 쓴 8-tap full parallel FIR filter, UART TX/RX를 Vivado로 설계했습니다."
+        "A digital watch, a keypad calculator debugged with an ILA (Integrated Logic Analyzer), an 8-tap fully parallel FIR filter with Baugh-Wooley signed multipliers, and UART transmit and receive, built in Vivado.",
+        "Digital watch, ILA(Integrated Logic Analyzer)로 디버깅한 keypad 계산기, Baugh-Wooley signed multiplier를 쓴 8-tap full parallel FIR filter, UART TX/RX를 Vivado로 설계했습니다."
       )
     },
     {
@@ -587,18 +593,19 @@ window.SITE = {
       stages: ["ver"],
       inMap: true,
       short: L("UVM study", "UVM 학습"),
-      repo: { url: "https://github.com/Minchan6847/DV_Study", private: true },
+      repo: { url: "https://github.com/Minchan6847/DV_Study", private: false },
       text: L(
         "Testbench practice in SystemVerilog and UVM, starting from a 4-bit adder.",
         "4-bit adder부터 시작한 SystemVerilog, UVM testbench 학습입니다."
       )
     },
     {
-      title: L("Driver monitoring robot", "운전자 모니터링 로봇"),
-      period: L("August 2020", "2020.08"),
+      title: L("Algorithm problem solving on Baekjoon Online Judge", "백준 온라인 저지 알고리즘 문제풀이"),
+      period: L("June to August 2022", "2022.06 ~ 2022.08"),
+      repo: { url: "https://github.com/Minchan6847/BOJ_solution", private: false },
       text: L(
-        "A hackathon prototype that measures alcohol level with a gas sensor and uses face recognition to check that the driver is watching the road. Encouragement Award.",
-        "알코올 센서로 음주 수치를 측정하고 얼굴 인식으로 전방 주시를 확인하는 해커톤 시제품입니다. 장려상을 받았습니다."
+        "Practice solving algorithm problems on Baekjoon Online Judge (BOJ) in C++20. The repository holds my solutions to about 230 problems.",
+        "백준 온라인 저지(BOJ)에서 C++20으로 알고리즘 문제풀이를 연습했습니다. 약 230문제의 풀이가 repository에 있습니다."
       )
     },
     {
@@ -620,6 +627,7 @@ window.SITE = {
     },
     {
       title: L("Humanoid robot vision software", "휴머노이드 로봇 영상인식 소프트웨어"),
+      repo: { url: "https://github.com/Minchan6847/Seebot_Run", private: true },
       period: L("March to October 2018", "2018.03 ~ 2018.10"),
       text: L(
         "Team of six in the Intelligent SoC Robot War. We wrote software for a humanoid to recognize obstacles from camera images and clear a course on its own.",
@@ -631,18 +639,20 @@ window.SITE = {
   experience: [
     {
       period: L("Dec 2025 to Jun 2026", "2025.12 ~ 2026.06"),
-      title: L("AI Digital System Semiconductor R&D Design Program", "인공지능 디지털 시스템반도체 R&D 설계 인력 양성 과정"),
+      title: L("AI Digital System Semiconductor R&D Design Engineers Training Program", "인공지능 디지털 시스템반도체 R&D 설계 인력 양성 과정"),
       org: L("Synopsys Academic & Research Alliances and Myongji University, 960 hours", "Synopsys Academic & Research Alliances, 명지대학교 · 960시간"),
       points: [
+        L("In-person K-Digital Training (KDT) course", "오프라인 K-Digital Training(KDT) 과정"),
         L("ASIC flow from RTL to GDSII with Design Compiler, IC Compiler II, Formality, PrimeTime, VCS and Verdi", "Design Compiler, IC Compiler II, Formality, PrimeTime, VCS, Verdi를 사용한 ASIC RTL-to-GDSII flow"),
         L("Two projects: the 8-bit CISC processor and the ORCA SoC", "프로젝트 2건: 8-bit CISC 프로세서, ORCA SoC")
       ]
     },
     {
-      period: L("Jan 2023 to Nov 2025", "2023.01 ~ 2025.11"),
+      period: L("Aug 2022 to Nov 2025", "2022.08 ~ 2025.11"),
       title: L("Air defense system software officer, First Lieutenant", "방공체계 SW 담당 장교 (중위)"),
-      org: L("Republic of Korea Air Force", "대한민국 공군"),
+      org: L("Republic of Korea Air Force Air Defense Control Command", "공군 방공관제사령부"),
       points: [
+        L("Served as a commissioned officer (Second Lieutenant to First Lieutenant)", "장교로 복무 (소위 임관, 중위 전역)"),
         L("Planned and coordinated 18 software updates covering 131 improvement items across development, operations and system teams", "개발, 작전, 체계운용 부서와 협조해 SW 업데이트 18회, 개선 항목 131건을 계획하고 총괄"),
         L("Led a new web-based status reporting system from requirements and screen design through operational testing and rollout", "웹 기반 상황 보고 체계 신규 개발을 요구사항 정리, 화면 설계부터 운용시험평가, 전력화까지 총괄"),
         L("Redesigned a system changeover procedure, cutting it from about one week to about two hours", "체계 전환 절차를 개선해 소요 시간을 약 1주일에서 약 2시간으로 단축")
@@ -653,6 +663,7 @@ window.SITE = {
       title: L("Intern, chip design and measurement", "현장실습생, 칩 설계 및 측정"),
       org: L("Korea Institute of Science and Technology (KIST)", "한국과학기술연구원(KIST)"),
       points: [
+        L("Credit-bearing internship from the summer term through the second semester of my fourth undergraduate year", "학부 4학년 여름학기부터 2학기까지 진행한 학점연계 현장실습"),
         L("Digital block design and layout for a SPAD image sensor in TSMC 180 nm", "TSMC 180nm SPAD 이미지센서의 디지털 block 설계와 layout"),
         L("Test board, FPGA code and GUI for chip measurement", "칩 측정용 test board, FPGA 코드, GUI 구축")
       ]
@@ -662,7 +673,7 @@ window.SITE = {
   education: {
     school: L("University of Seoul", "서울시립대학교"),
     degree: L("B.S. in Electrical and Computer Engineering", "전자전기컴퓨터공학 학사"),
-    period: L("2017 to 2022", "2017 ~ 2022"),
+    period: L("Feb 2017 to Feb 2022", "2017.02 ~ 2022.02"),
     gpa: L("GPA 4.23 / 4.5 overall, 4.33 / 4.5 in the major", "평점 4.23 / 4.5, 전공 평점 4.33 / 4.5"),
     courses: L(
       "A+ in Integrated Circuit Design, Computer Architecture, Microprocessors, Semiconductor Devices, Electronic Circuits, Operating Systems and Compilers",
@@ -672,27 +683,33 @@ window.SITE = {
 
   awards: [
     {
-      year: "2026",
+      year: L("Jun 2026", "2026.06"),
       title: L("Top Award, KDT final hackathon", "KDT 파이널 해커톤 최우수상"),
-      org: L("Myongji University, for the ORCA SoC project", "명지대학교 · ORCA SoC 프로젝트")
+      org: L("Myongji University, for the ", "명지대학교 · "),
+      project: "orca",
+      projectText: L("ORCA SoC project", "ORCA SoC 프로젝트")
     },
     {
-      year: "2024",
+      year: L("Jul 2024", "2024.07"),
       title: L("Excellence Award in electronic circuit design, Aviation Technology Competition", "항공기술 경연대회 전자회로설계 분야 우수상 (군수사령관상)"),
       org: L("ROKAF Logistics Command. Timed schematic and PCB layout in OrCAD and PADS.", "공군군수사령부 · OrCAD schematic, PADS PCB layout")
     },
     {
-      year: "2020",
+      year: L("Aug 2020", "2020.08"),
       title: L("Encouragement Award, Robot Industry Online Hackathon", "로봇산업 온라인 해커톤 장려상"),
-      org: L("Korea University and the Korea Association of Robot Industry", "고려대학교, 로봇산업협회")
+      org: L("Korea University and the Korea Association of Robot Industry", "고려대학교, 로봇산업협회"),
+      detail: L(
+        "Driver monitoring robot: a prototype that measures alcohol level with a gas sensor and uses face recognition to check that the driver is watching the road.",
+        "운전자 모니터링 로봇: 알코올 센서로 음주 수치를 측정하고 얼굴 인식으로 전방 주시를 확인하는 시제품입니다."
+      )
     },
     {
-      year: "2020",
+      year: L("May 2020", "2020.05"),
       title: L("National Science and Engineering Scholarship", "국가우수(이공계)장학"),
       org: L("Korea Student Aid Foundation. Full tuition for four semesters.", "한국장학재단 · 4학기 수업료 전액")
     },
     {
-      year: "2017, 2019",
+      year: L("Sep 2019, Sep 2017", "2019.09, 2017.09"),
       title: L("Academic Excellence Scholarship", "학업우수장학"),
       org: L("University of Seoul. Top 10% of the class.", "서울시립대학교 · 성적 상위 10%")
     }
@@ -700,11 +717,15 @@ window.SITE = {
 
   skills: [
     { stage: L("RTL design and verification", "RTL 설계 · Verification"), items: "Verilog, SystemVerilog, UVM, VCS, Verdi, Vivado, Quartus Prime" },
-    { stage: L("Synthesis and STA", "Synthesis · STA"), items: "Design Compiler, SDC, MCMM, PrimeTime, Formality" },
-    { stage: L("Place and route", "P&R"), items: "IC Compiler II, UPF multi-voltage, CTS, ECO" },
-    { stage: L("Sign-off", "Sign-off"), items: "PrimeTime DMSA, StarRC, LEC, DRC, LVS" },
-    { stage: L("Automation", "자동화"), items: "Python, Tcl, Shell, SQLite, Git and GitHub pull requests" },
-    { stage: L("Also", "기타"), items: "Cadence Virtuoso, OrCAD, PADS, C, C++, Java" }
+    { stage: L("Synthesis", "Synthesis"), items: "Design Compiler (WLM, Topographical mode, 2nd-pass synthesis), SDC, MCMM" },
+    { stage: L("LEC", "LEC"), items: "Formality" },
+    { stage: L("STA", "STA"), items: "Physically-aware PrimeTime DMSA (Distributed Multi-Scenario Analysis), Timing ECO" },
+    { stage: L("Place and route", "P&R"), items: "IC Compiler II, Floorplan, UPF multi-voltage, CTS, ECO" },
+    { stage: L("Sign-off", "Sign-off"), items: "StarRC, DRC, LVS" },
+    { stage: L("Automation", "자동화"), items: "Python, Tcl, Shell Script, Git and GitHub pull requests" },
+    { stage: L("AMS (Analog Mixed-Signal)", "AMS (Analog Mixed-Signal)"), items: "Cadence Virtuoso, Spectre, Calibre" },
+    { stage: L("PCB", "PCB"), items: "Eagle, OrCAD, PADS" },
+    { stage: L("Also", "기타"), items: "C, C++, Java" }
   ],
 
   ui: {
@@ -744,6 +765,7 @@ window.SITE = {
     langSwitch: L("한국어", "English"),
     langSwitchLabel: L("한국어로 보기", "View in English"),
     notFound: L("That page does not exist.", "없는 페이지입니다."),
-    next: L("Next project", "다음 프로젝트")
+    next: L("Next project", "다음 프로젝트"),
+    prev: L("Previous project", "이전 프로젝트")
   }
 };

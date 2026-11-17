@@ -95,7 +95,7 @@
 
     h += '<section class="wrap block" id="sec-projects"><h2>' + esc(t(S.ui.projects)) + '</h2><div class="plist">';
     S.projects.forEach(function (p) {
-      h += '<article class="pitem"><div class="phead"><h3><a href="' + href(p.id) + '">' + esc(t(p.title)) + "</a></h3>" +
+      h += '<article class="pitem" id="proj-' + esc(p.id) + '"><div class="phead"><h3><a href="' + href(p.id) + '">' + esc(t(p.title)) + "</a></h3>" +
         '<p class="when">' + esc(t(p.period)) + "</p></div>" +
         "<p>" + rich(t(p.summary)) + "</p>" + stageStrip(p.stages) + '<ul class="hl">';
       p.highlights.forEach(function (x) { h += "<li>" + rich(t(x)) + "</li>"; });
@@ -125,7 +125,9 @@
       "<p>" + esc(t(E.gpa)) + "</p><p>" + esc(t(E.courses)) + "</p></div>" +
       '<h3 class="sub">' + esc(t(S.ui.awards)) + '</h3><ul class="awards">';
     S.awards.forEach(function (a) {
-      h += '<li><span class="when">' + esc(a.year) + "</span><div><strong>" + esc(t(a.title)) + '</strong><p class="org">' + esc(t(a.org)) + "</p></div></li>";
+      h += '<li><span class="when">' + esc(t(a.year)) + "</span><div><strong>" + esc(t(a.title)) + '</strong><p class="org">' + esc(t(a.org)) +
+        (a.project ? '<a href="' + href("projects") + '" data-scroll="proj-' + esc(a.project) + '">' + esc(t(a.projectText)) + "</a>" : "") + "</p>" +
+        (a.detail ? '<p class="adetail">' + rich(t(a.detail)) + "</p>" : "") + "</div></li>";
     });
     h += "</ul></section>";
 
@@ -175,7 +177,9 @@
       h += "</section>";
     }
     var idx = S.projects.indexOf(p), nx = S.projects[(idx + 1) % S.projects.length];
-    h += '<p class="next">' + esc(t(S.ui.next)) + ': <a href="' + href(nx.id) + '">' + esc(t(nx.title)) + "</a></p></article>";
+    h += '<nav class="next">' +
+      (idx > 0 ? "<p>" + esc(t(S.ui.prev)) + ': <a href="' + href(S.projects[idx - 1].id) + '">' + esc(t(S.projects[idx - 1].title)) + "</a></p>" : "") +
+      "<p>" + esc(t(S.ui.next)) + ': <a href="' + href(nx.id) + '">' + esc(t(nx.title)) + "</a></p></nav></article>";
     return h;
   }
 
@@ -216,6 +220,15 @@
         var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg);
       };
       try { navigator.clipboard.writeText(S.profile.email).then(done, fallback); } catch (e) { fallback(); }
+    });
+
+    Array.prototype.forEach.call(root.querySelectorAll("a[data-scroll]"), function (a) {
+      a.addEventListener("click", function (e) {
+        var el = document.getElementById(a.getAttribute("data-scroll"));
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     });
 
     var langSwitch = lastLang && lastLang !== lang && view === lastView;
